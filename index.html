@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Masum's Shop BD</title>
+
+    <style>
+        :root{
+            --ink:#12151c;
+            --paper:#fbfaf7;
+            --gold:#b8863a;
+            --gold-soft:#e9d9b8;
+            --line:#e7e4dc;
+        }
+
+        body{
+            background:var(--paper);
+            font-family:'Inter',sans-serif;
+            color:var(--ink);
+            margin:0;
+        }
+
+        /* ===== Navbar ===== */
+        .navbar{
+            background:var(--paper) !important;
+            border-bottom:1px solid var(--line);
+            padding:0.9rem 0;
+            box-shadow:none;
+            transition:box-shadow .3s ease;
+        }
+        .navbar.scrolled{
+            box-shadow:0 4px 20px rgba(18,21,28,0.06);
+        }
+        .navbar-brand{
+            display:flex;
+            align-items:center;
+            gap:.55rem;
+        }
+        .brand-mark{
+            width:9px;
+            height:9px;
+            border-radius:2px;
+            background:var(--gold);
+            display:inline-block;
+            transform:rotate(45deg);
+            position:relative;
+            top:-2px;
+        }
+        .navbar-brand span.name{
+            font-family:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            font-weight:900;
+            font-size:1.8rem;
+            color:var(--ink);
+            letter-spacing:.2px;
+        }
+        .navbar-brand span.tag{
+            font-family:'Inter',sans-serif;
+            font-size:.68rem;
+            font-weight:600;
+            letter-spacing:.14em;
+            text-transform:uppercase;
+            color:var(--gold);
+            border-left:1px solid var(--line);
+            padding-left:.6rem;
+            margin-left:.1rem;
+        }
+        .navbar-nav{ gap:.35rem; }
+        .nav-link{
+            position:relative;
+            color:var(--ink) !important;
+            font-size:.82rem;
+            font-weight:600;
+            letter-spacing:.06em;
+            text-transform:uppercase;
+            padding:.55rem .9rem !important;
+            opacity:.75;
+            transition:opacity .2s ease;
+        }
+        .nav-link::after{
+            content:"";
+            position:absolute;
+            left:.9rem;
+            right:.9rem;
+            bottom:.35rem;
+            height:2px;
+            background:var(--gold);
+            transform:scaleX(0);
+            transform-origin:left;
+            transition:transform .25s ease;
+        }
+        .nav-link:hover{ opacity:1; }
+        .nav-link:hover::after{ transform:scaleX(1); }
+        .nav-item.active .nav-link{ opacity:1; }
+        .nav-item.active .nav-link::after{ transform:scaleX(1); }
+        .navbar-toggler{
+            border:1px solid var(--line);
+            padding:.4rem .55rem;
+        }
+        .navbar-toggler:focus{ box-shadow:0 0 0 3px var(--gold-soft); }
+        .navbar-toggler-icon{
+            background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(18,21,28,0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* ===== Hero ===== */
+        #jerseys-contents > section.hero{
+            background:linear-gradient(135deg, var(--gold-soft), var(--paper));
+            border-radius:12px;
+            padding:3rem 2rem;
+            text-align:center;
+            margin-bottom:2.5rem;
+        }
+        #jerseys-contents > section.hero h2{
+            font-family:'Fraunces',serif;
+            font-weight:700;
+            font-size:2.2rem;
+        }
+        #jerseys-contents > section.hero p{
+            color:#555;
+            margin-bottom:1.5rem;
+        }
+        #jerseys-contents > section.hero button{
+            background:var(--gold);
+            color:#fff;
+            border:none;
+            padding:.75rem 2.2rem;
+            border-radius:6px;
+            font-weight:600;
+            font-size:.95rem;
+            letter-spacing:.03em;
+            box-shadow:0 4px 14px rgba(184,134,58,0.25);
+            transition:all .25s ease;
+            cursor:pointer;
+        }
+        #jerseys-contents > section.hero button:hover{
+            background:#a3762f;
+            box-shadow:0 6px 20px rgba(184,134,58,0.35);
+            transform:translateY(-2px);
+        }
+        #jerseys-contents > section.hero button:active{
+            transform:translateY(0);
+            box-shadow:0 3px 10px rgba(184,134,58,0.25);
+        }
+
+        /* ===== Category cards ===== */
+        #catagory-contents h3,
+        #features-products h3{
+            font-family:'Fraunces',serif;
+            font-weight:700;
+            margin-bottom:1.2rem;
+        }
+        .category-card{
+            background:#fff;
+            border:1px solid var(--line);
+            border-radius:10px;
+            padding:1.2rem 1rem;
+            text-align:center;
+            font-weight:600;
+            transition:box-shadow .25s ease, transform .25s ease;
+        }
+        .category-card:hover{
+            box-shadow:0 8px 20px rgba(18,21,28,0.08);
+            transform:translateY(-3px);
+            border-color:var(--gold);
+        }
+        .category-card a{
+            text-decoration:none;
+            color:var(--ink);
+            opacity:1;
+        }
+        .category-card a::after{ display:none; }
+
+        /* ===== Sidebar (Special Offers + Categories + Filter) ===== */
+        .shop-sidebar{
+            background:#fff;
+            border:1px solid var(--line);
+            border-top:3px solid var(--gold);
+            border-radius:10px;
+            padding:1.5rem 1.2rem;
+            height:fit-content;
+        }
+        .shop-sidebar h6{
+            text-transform:uppercase;
+            font-size:.75rem;
+            font-weight:700;
+            letter-spacing:.05em;
+            color:var(--gold);
+            margin-bottom:.8rem;
+        }
+        .offer-list{
+            list-style:none;
+            padding:0;
+            margin:0 0 1.5rem;
+        }
+        .offer-list li{
+            padding:.4rem 0;
+            font-size:.88rem;
+            font-weight:500;
+            color:var(--ink);
+            cursor:pointer;
+            transition:color .2s ease;
+        }
+        .offer-list li:hover{ color:var(--gold); }
+        .offer-list li i{
+            color:var(--gold);
+            margin-right:.5rem;
+            font-size:.7rem;
+        }
+        .cat-header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            background:var(--gold-soft);
+            padding:.6rem .8rem;
+            border-radius:6px;
+            font-weight:700;
+            color:var(--ink);
+            margin-bottom:.5rem;
+        }
+        .cat-header .badge{
+            background:var(--gold);
+            color:#fff;
+        }
+        .cat-list{
+            list-style:none;
+            padding:0;
+            margin:0 0 1.5rem;
+        }
+        .cat-list li{
+            display:flex;
+            justify-content:space-between;
+            padding:.45rem .3rem;
+            font-size:.85rem;
+            color:#444;
+            cursor:pointer;
+            border-radius:4px;
+            transition:background .15s ease;
+        }
+        .cat-list li:hover{
+            background:var(--paper);
+            color:var(--gold);
+        }
+        .cat-list li span.count{ color:#999; font-size:.8rem; }
+
+        .filter-list{
+            list-style:none;
+            padding:0;
+            margin:0;
+        }
+        .filter-list li{
+            padding:.75rem .3rem;
+            border-bottom:1px solid var(--line);
+            font-weight:600;
+            color:var(--ink);
+            cursor:pointer;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            border-radius:6px;
+            transition:background .2s ease, color .2s ease, padding-left .2s ease;
+        }
+        .filter-list li:last-child{ border-bottom:none; }
+        .filter-list li:hover{
+            background:var(--gold-soft);
+            color:var(--gold);
+            padding-left:.7rem;
+        }
+        .filter-list li::after{
+            content:"\203a";
+            font-size:1.1rem;
+            color:var(--gold);
+            opacity:.6;
+        }
+
+        /* ===== Top filter bar ===== */
+        .search-bar{
+            border:1px solid var(--line);
+            border-radius:8px;
+            padding:.6rem 1rem;
+            background:#fff;
+        }
+        .search-bar input{
+            border:none;
+            outline:none;
+            width:100%;
+            font-size:.9rem;
+            background:transparent;
+        }
+        .gender-pill{
+            border:1px solid var(--line);
+            border-radius:30px;
+            padding:.4rem 1rem;
+            font-size:.85rem;
+            font-weight:600;
+            background:#fff;
+            color:#555;
+            cursor:pointer;
+            transition:all .2s ease;
+        }
+        .gender-pill.active{
+            background:var(--ink);
+            color:#fff;
+            border-color:var(--ink);
+        }
+        .gender-pill:hover:not(.active){
+            border-color:var(--gold);
+            color:var(--gold);
+        }
+        .chip{
+            display:inline-flex;
+            align-items:center;
+            gap:.3rem;
+            border:1px solid var(--line);
+            border-radius:20px;
+            padding:.35rem .8rem;
+            font-size:.8rem;
+            color:#444;
+            background:#fff;
+            cursor:pointer;
+            transition:all .2s ease;
+            white-space:nowrap;
+        }
+        .chip .count{ color:#999; font-size:.75rem; }
+        .chip:hover{ border-color:var(--gold); color:var(--gold); }
+        .chip.selected{
+            background:var(--gold-soft);
+            border-color:var(--gold);
+            color:var(--ink);
+            font-weight:600;
+        }
+        .chip.selected .btn-close{ font-size:.55rem; margin-left:.2rem; }
+
+        /* ===== Product cards ===== */
+        .shop-product-card{
+            border:1px solid var(--line);
+            border-radius:10px;
+            overflow:hidden;
+            background:#fff;
+            position:relative;
+            transition:box-shadow .25s ease;
+        }
+        .shop-product-card:hover{
+            box-shadow:0 10px 24px rgba(18,21,28,0.1);
+        }
+        .discount-badge{
+            position:absolute;
+            top:.6rem;
+            left:.6rem;
+            background:#e0355b;
+            color:#fff;
+            font-size:.72rem;
+            font-weight:700;
+            padding:.2rem .5rem;
+            border-radius:4px;
+            z-index:2;
+        }
+        .delivery-badge{
+            position:absolute;
+            bottom:.6rem;
+            left:.6rem;
+            background:#1f9d55;
+            color:#fff;
+            font-size:.68rem;
+            font-weight:600;
+            padding:.25rem .5rem;
+            border-radius:4px;
+            z-index:2;
+        }
+        .shop-product-card img{
+            width:100%;
+            height:230px;
+            object-fit:cover;
+            background:#f2f2f2;
+        }
+        .shop-product-card .p-title{
+            padding:.7rem .9rem;
+            font-size:.85rem;
+            font-weight:500;
+            color:var(--ink);
+            margin:0;
+        }
+
+        /* ===== Footer ===== */
+        footer{
+            background:var(--ink);
+            color:#fff;
+            margin-top:3rem;
+            padding:1.8rem 0;
+        }
+        footer a{
+            color:#fff;
+            text-decoration:none;
+            margin:0 1rem;
+            font-weight:500;
+            opacity:.85;
+            transition:opacity .2s ease;
+        }
+        footer a:hover{
+            opacity:1;
+            color:var(--gold-soft);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+    <nav class="navbar shadow-sm sticky-top navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-5">
+            <a class="navbar-brand" href="index.html">
+                <span class="brand-mark"></span>
+                <span class="name">Masum's Shop</span>
+                <span class="tag">BD</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="d-flex align-items-center ms-auto">
+                <form class="d-none d-md-flex me-2" role="search" id="navSearchForm">
+                    <input class="form-control form-control-sm" type="search" placeholder="Search...">
+                </form>
+                <button class="btn btn-link nav-link p-0" type="button" aria-label="Toggle search">
+                    <i class="bi bi-search fs-5"></i>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="men.html">Men Clothing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="women.html">Women Clothing</a></li>                 
+                    <li class="nav-item"><a class="nav-link" href="sports.html">Sports</a></li>
+                    <li class="nav-item"><a class="nav-link" href="suppliment.html">Supplements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sexualwellness.html">Sexual Wellness</a></li>
+                    <li class="nav-item"><a class="nav-link" href="beauty.html">Beauty</a></li>
+
+                    <!-- Wishlist -->
+                    <li class="nav-item me-2">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-heart fs-5"></i>
+                        </a>
+                    </li>
+                    <!-- Cart -->
+                    <li class="nav-item me-2">
+                        <a class="nav-link position-relative" href="#">
+                            <i class="bi bi-cart3 fs-5"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                3
+                            </span>
+                        </a>
+                    </li>
+                     <!-- Account -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-person-circle fs-5"></i>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    
+<!-- Main content -->
+    <div class="container-fluid px-4 px-lg-5 py-4">
+        <div class="row g-4">
+
+        <!-- Sidebar: Special Offers + Categories + Filter By -->
+        <aside class="col-lg-3 order-lg-1 order-2 shop-sidebar"
+            style="position: sticky; top: 20px; height: calc(100vh - 20px); overflow-y: auto; overflow-x: hidden; padding-right: 10px;">
+
+            <h6>Special Offers</h6>
+            <ul class="offer-list">
+                <li><i class="bi bi-lightning-fill"></i> Mega Deal</li>
+                <li><i class="bi bi-lightning-fill"></i> New Arrival</li>
+                <li><i class="bi bi-lightning-fill"></i> Top Selling</li>
+                <li><i class="bi bi-lightning-fill"></i> Free Delivery</li>
+                <li><i class="bi bi-lightning-fill"></i> Merchandise</li>
+            </ul>
+
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="mb-0">Categories</h6>
+                <a href="#" class="small text-decoration-none" style="color: var(--gold);">Clear</a>
+            </div>
+
+            <div class="cat-header">
+                Mens <span class="badge rounded-pill">1264</span>
+            </div>
+
+            <ul class="cat-list">
+                <li>Half Sleeve T-shirt <span class="count">348</span></li>
+                <li>Full Sleeve T-shirt <span class="count">143</span></li>
+                <li>Polo T-Shirt <span class="count">147</span></li>
+                <li>Hoodie <span class="count">30</span></li>
+                <li>Jacket <span class="count">30</span></li>
+                <li>Joggers <span class="count">17</span></li>
+            </ul>
+
+            <h6>Filter By</h6>
+            <ul class="filter-list">
+                <li>Size</li>
+                <li>Color</li>
+                <li>Price Range</li>
+            </ul>
+
+        </aside>
+
+<!-- Main -->
+            <main id="jerseys-contents" class="col-lg-9 order-lg-2 order-1">
+
+                <section class="hero">
+                    <h2>🔥 New Arrivals</h2>
+                    <p>New season. New kits. Same passion!</p>
+                    <button>Shop Now</button>
+                </section>
+
+                
+                <!-- Search + gender pills -->
+                <div class="search-bar d-flex align-items-center mb-3">
+                    <i class="bi bi-search text-secondary me-2"></i>
+                    <input type="text" placeholder="Search a product">
+                </div>
+
+                <div class="d-flex gap-2 mb-3 flex-wrap">
+                    <button class="gender-pill active"><i class="bi bi-person-fill"></i> Men</button>
+                    <button class="gender-pill">Women</button>
+                    <button class="gender-pill">Kids</button>
+                    <button class="gender-pill">Teens</button>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                    <span class="chip">Half Sleeve T-shirt <span class="count">348</span></span>
+                    <span class="chip">Full Sleeve T-shirt <span class="count">143</span></span>
+                    <span class="chip">Polo T-shirt <span class="count">147</span></span>
+                    <span class="chip">Hoodie <span class="count">30</span></span>
+                    <span class="chip">Jacket <span class="count">30</span></span>
+                    <span class="chip">Joggers <span class="count">17</span></span>
+                </div>
+
+                <div class="d-flex align-items-center gap-2 mb-4 pb-3" style="border-bottom:1px solid var(--line);">
+                    <span class="chip selected">Mens <span class="btn-close"></span></span>
+                    <a href="#" class="small text-decoration-none" style="color:var(--gold);">Clear</a>
+                </div>
+                <!--Men Clothing-->
+                <section id="features-products" class="card p-2">
+                    <h3 class="text-center">Men Clothing</h3>
+                    <div class="row g-4">
+                        <div class="col-4 col-md-4">
+                            <div class="shop-product-card">
+                                <span class="discount-badge">-20%</span>
+                                <img class="img-fluid height-100 width-100" src="./Assets/men1.jpg" alt="Home Kit">
+                                <p class="p-title">Men's Combo</p>
+                                <p class="px-3 pb-2 fw-semibold" style="color:var(--gold);">Price: $5.00</p>
+                            </div>
+                        </div>
+                        <div class="col-4 col-md-4">
+                            <div class="shop-product-card">
+                                <span class="discount-badge">-10%</span>
+                                <img class="img-fluid height-100 width-100" src="./Assets/men2.jpg" alt="Away Kit">
+                                <p class="p-title">Men's Outfit combo</p>
+                                <p class="px-3 pb-2 fw-semibold" style="color:var(--gold);">Price: $15.00</p>
+                            </div>
+                        </div>
+                        <div class="col-4 col-md-4">
+                            <div class="shop-product-card">
+                                <span class="discount-badge">-13%</span>
+                                <img class="img-fluid height-100 width-100" src="./Assets/men3.jpg" alt="Away Kit">
+                                <p class="p-title">Men's Casual Shirt</p>
+                                <p class="px-3 pb-2 fw-semibold" style="color:var(--gold);">Price: $10.00</p>
+                            </div>
+                        </div>
+                       <div class="text-center mt-3">
+                            <button class="btn btn-secondary px-5 py-2 rounded-pill shadow fw-bold" style="background-color: #b8863a;">
+                                See More →
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                
+             </br></br>
+                
+                <section id="features-products" class="card p-2">
+                    <h3 class="text-center">Women Clothing</h3>
+                    <div class="row g-4">
+                        <div class="col-4 col-md-4">
+                            <div class="shop-product-card">
+                                <span class="discount-badge">-22%</span>
+                                
+                                <img src="./Assets/women1.jpg" alt="Home Kit">
+                                <p class="p-title">Women's Casual Dress</p>
+                                <p class="px-3 pb-2 fw-semibold" style="color:var(--gold);">Price: $68.00</p>
+                            </div>
+                        </div>
+                        <div class="col-4 col-md-4">
+                            <div class="shop-product-card">
+                                <span class="discount-badge">-23%</span>
+                                <img src="./Assets/women2.jpg" alt="Away Kit">
+                                <p class="p-title">Women's Casual Skirt</p>
+                                <p class="px-3 pb-2 fw-semibold" style="color:var(--gold);">Price: $55.00</p>
+                            </div>
+                        </div>
+                        <div class="col-4 col-md-4">
+                            <div class="shop-product-card">
+                                <span class="discount-badge">-23%</span>
+                                <img src="./Assets/women3.jpg" alt="Away Kit">
+                                <p class="p-title">Women's Jamila Dress</p>
+                                <p class="px-3 pb-2 fw-semibold" style="color:var(--gold);">Price: $45.00</p>
+                            </div>
+                        </div>
+                       <div class="text-center mt-3">
+                            <button class="btn btn-secondary px-5 py-2 rounded-pill shadow fw-bold" style="background-color: #b8863a;">
+                                See More →
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+
+<!-- Footer -->
+<footer>
+    <div class="container footer-top">
+        <div class="row g-4">
+
+            <!-- Brand -->
+            <div class="col-lg-4 col-md-6">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="brand-mark-f"></span>
+                    <span class="footer-brand-name">Masum's Shop <span style="color:var(--gold);">BD</span></span>
+                </div>
+               
+                <div class="social-icons">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-whatsapp"></i></a>
+                    <a href="#"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+
+            <!-- Shop links -->
+            <div class="col-lg-2 col-md-6 col-6">
+                <h6>Shop</h6>
+                <ul class="footer-links">
+                    <li><a href="men.html">Men</a></li>
+                    <li><a href="women.html">Women</a></li>
+                    <li><a href="teen.html">Teen</a></li>
+                    <li><a href="sports.html">Sports</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                </ul>
+            </div>
+
+            <!-- Customer service -->
+            <div class="col-lg-2 col-md-6 col-6">
+                <h6>Customer Service</h6>
+                <ul class="footer-links">
+                    <li><a href="#Shipping">Shipping Info</a></li>
+                    <li><a href="#Returns">Returns &amp; Exchange</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#contacts">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Company -->
+            <div class="col-lg-2 col-md-6 col-6">
+                <h6>Company</h6>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="col-lg-2 col-md-6">
+                <h6>Stay Updated</h6>
+                <p class="footer-desc mb-2">Get offers &amp; new drop alerts.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email">
+                    <button type="submit"><i class="bi bi-send-fill"></i></button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+   
+    <!-- Bottom bar -->
+    <div class="container footer-bottom d-flex flex-wrap justify-content-between align-items-center">
+        <span>&copy; 2026 Masum's Shop BD. All rights reserved.</span>
+        <div>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Sitemap</a>
+        </div>
+    </div>
+</footer>
+
+    <script src="./bootstrap.bundle.js"></script>
+    <script>
+        window.addEventListener('scroll', function () {
+            document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 10);
+        });
+    </script>
+</body>
+
+</html>
