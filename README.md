@@ -12,11 +12,14 @@ Responsive fashion e-commerce **demo storefront** built with HTML5, CSS3 and van
 
 - Local shopping activity panel and saved **order drafts** (never submitted)
 
+- Responsive customer dashboard (`dashboard.html`) for browser-local cart, wishlist and saved drafts
+
 ## Quick start
 Open `index.html` locally or start a local HTTP server: `python -m http.server 8000`.
 
 ## Structure
 - `index.html` — storefront and cart dialog
+- `dashboard.html` — customer dashboard (local demo, no login)
 - `assets/css/style.css` — design and responsive layouts
 - `assets/js/app.js` — demo product data, filtering, cart and wishlist
 - `Assets/` — existing original product pictures
