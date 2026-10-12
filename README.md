@@ -7,6 +7,7 @@ Responsive fashion e-commerce **demo storefront** built with HTML5, CSS3 and van
 - Working search, category filtering and price/name sorting
 - Local wishlist and shopping bag with quantity controls and subtotal
 - Browser localStorage persistence (per browser)
+- Product detail dialogs and checkout order preview (demo-only, no transactions)
 - Accessible labels, keyboard-operated controls, cart dialog and reduced-motion support
 
 ## Quick start
