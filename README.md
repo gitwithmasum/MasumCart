@@ -1,126 +1,34 @@
-# 🛒 Online Supermarket Shop
-A modern and responsive online supermarket website built using HTML5, CSS3, Bootstrap 5, and JavaScript. The platform offers a smooth shopping experience where customers can browse products, explore categories, and add items to their cart.
+# MasumCart
 
+Responsive fashion e-commerce **demo storefront** built with HTML5, CSS3 and vanilla JavaScript.
 
-![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
----
+## Features
+- Responsive men/women catalog using six original product images
+- Working search, category filtering and price/name sorting
+- Local wishlist and shopping bag with quantity controls and subtotal
+- Browser localStorage persistence (per browser)
+- Accessible labels, keyboard-operated controls, cart dialog and reduced-motion support
 
-## 🚀 Live Demo
+## Quick start
+Open `index.html` locally or start a local HTTP server: `python -m http.server 8000`.
 
-👉 https://github.com/gitwithmasum/Project-Beta-1.0
+## Structure
+- `index.html` — storefront and cart dialog
+- `assets/css/style.css` — design and responsive layouts
+- `assets/js/app.js` — demo product data, filtering, cart and wishlist
+- `Assets/` — existing original product pictures
+- `LICENSE` — MIT
 
----
+The older empty category pages and local Bootstrap distribution remain in the repo for backward compatibility but are no longer needed by the redesigned homepage. Future cleanup can remove them after verifying any external links.
 
-## 📸 Preview
+## Scope and limitations
+This is **not a live commerce site**. Original sample USD prices are retained. There is no inventory verification, authentication, payment integration, shipping, orders or backend. Do not enter payment details. Cart/wishlist persist only in your current browser.
 
-![Project Preview](./assets/preview.png)
+## Deploy
+Use GitHub Pages (Settings → Pages → Deploy from branch → `main` / root) after merging the upgrade PR. Relative asset paths work on project Pages URLs.
 
----
+## Author
+Masum Billah — [GitHub](https://github.com/gitwithmasum)
 
-## ✨ Features
-
-- 🏠 Responsive Home Page
-- 🛍️ Product Listing
-- 📂 Product Categories
-- 🔎 Product Search
-- 🛒 Shopping Cart
-- ❤️ Wishlist
-- 🎁 Special Offers
-- 📦 Featured Products
-- 📱 Mobile-Friendly Design
-- ⚡ Fast and Clean User Interface
-- 🎨 Modern UI Design
-- 🚚 Delivery Information
-- ⭐ Product Ratings
-
----
-
-## 🛠️ Technologies Used
-
-- HTML5
-- CSS3
-- Bootstrap 5
-- Bootstrap Icons
-
----
-
-## 📂 Project Structure
-
-```
-Online-Supermarket/
-│
-├── assets/
-│   ├── images/
-│   ├── css/
-│   ├── js/
-│
-├── index.html
-├── products.html
-├── about.html
-├── contact.html
-├── README.md
-```
-
----
-
-## 📋 Website Sections
-
-- Navigation Bar
-- Hero Section
-- Categories
-- Special Offers
-- Featured Products
-- Product Cards
-- Shopping Cart
-- Sidebar Filter
-- Footer
-
----
-
-## 🎯 Future Improvements
-
-- User Authentication
-- Product Search API
-- Online Payment Gateway
-- Order Tracking
-- Customer Reviews
-- Wishlist System
-- Admin Dashboard
-- Product Management
-- Dark Mode
-
----
-
-## 📱 Responsive Design
-
-This website is fully responsive and optimized for:
-
-- 💻 Desktop
-- 💼 Laptop
-- 📱 Mobile
-- 📟 Tablet
-
----
-
-## 👨‍💻 Developer
-
-**Masum Billah**
-
-Aspiring AI Engineer | MERN Stack Developer | Machine Learning Enthusiast
-
-- GitHub: https://github.com/gitwithmasum
-- Portfolio: https://github.com/gitwithmasum/Project-Alpha-1.0
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-## ⭐ Support
-
-If you found this project helpful, please consider giving it a ⭐ on GitHub!
+## License
+MIT. See [LICENSE](LICENSE).
